@@ -15,6 +15,8 @@
 """
 
 
+
+
 sum_cubes = 0
 value = 0
 cubes = []
