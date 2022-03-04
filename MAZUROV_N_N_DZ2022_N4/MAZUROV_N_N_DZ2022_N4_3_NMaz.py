@@ -3,7 +3,6 @@
 
 
 
-
 # !!!!!!!!!!!!!!! ПОШЛА ЗАЩИТА ОТ DDOS !!!  И  СКРИПТ НЕ ВСЕГДА ПРОХОДИТ !!!
  # Мы зарегистрировали подозрительный трафик исходящий из вашей сети.!!!!!
 # С помощью этой страницы мы сможем определить, что запросы отправляете именно вы, а не робот.!!!!!!
@@ -24,8 +23,18 @@
 from requests import get, utils
 from datetime import date
 
-check = utils.get_unicode_from_response(get("http://www.cbr.ru/scripts/XML_daily.asp"))
+from selenium import webdriver
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.set_capability("browserVersion", "67")
+chrome_options.set_capability("platformName", "Windows XP")
+driver = webdriver.Remote(
+    command_executor='http://www.cbr.ru/scripts/XML_daily.asp',
+    options=chrome_options
+)
+
+#check = utils.get_unicode_from_response(get("http://www.cbr.ru/scripts/XML_daily.asp"))
+check= driver.get("http://www.cbr.ru/scripts/XML_daily.asp")
 def currency_rate(parcng):
     value = check.split("<Valute ID=") # режим  и добываем значения
     d, m, y = map(int, value[0].split('"')[-4].split(".")) # добываем даты
@@ -37,3 +46,4 @@ def currency_rate(parcng):
 
 print(currency_rate("uSd")) 
 print(currency_rate("EUR")) 
+driver.quit()
