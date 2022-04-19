@@ -12,7 +12,7 @@
 
 
 
-import DZ_6_4_NMAZ
+import MAZUROV_N_N_DZ2022_N6_4_NMAZ
 from itertools import zip_longest
 import sys
 import argparse
